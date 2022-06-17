@@ -1,0 +1,24 @@
+{
+  "name": "node-crud-api",
+  "version": "1.0.0",
+  "description": "Simple CRUD API using in-memory database underneath",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+	"start:dev": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mamboojamboo/node-crud-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "CRUD"
+  ],
+  "author": "mamboojamboo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mamboojamboo/node-crud-api/issues"
+  },
+  "homepage": "https://github.com/mamboojamboo/node-crud-api#readme"
+}
