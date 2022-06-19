@@ -31,4 +31,12 @@ const update = (id: string, user: TUserCreateBodyReq) => {
 	});
 };
 
-export default { getAll, getById, create, update };
+const remove = (id: string) => {
+	return new Promise<void>(resolve => {
+		const index = usersMock.findIndex(u => u.id === id);
+		usersMock.splice(index, 1);
+		resolve();
+	});
+};
+
+export default { getAll, getById, create, update, remove };

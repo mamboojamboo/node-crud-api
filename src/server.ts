@@ -1,5 +1,5 @@
 import http, { ServerResponse, IncomingMessage } from 'http';
-import { getAllUsers, getUser, createUser, updateUser } from './controllers/usersController';
+import { getAllUsers, getUser, createUser, updateUser, deleteUser } from './controllers/usersController';
 
 const server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
 	console.log('Server req: ', req.url, req.method);
@@ -14,6 +14,9 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
 	} else if (req.url?.match(/\/api\/users\/([0-9]+)/) && req.method === 'PUT') {
 		const id = req.url.split('/')[3];
 		updateUser(req, res, id);
+	} else if (req.url?.match(/\/api\/users\/([0-9]+)/) && req.method === 'DELETE') {
+		const id = req.url.split('/')[3];
+		deleteUser(req, res, id);
 	} else {
 		res.writeHead(404, { 'Content-Type': 'application/json' });
 		res.end(JSON.stringify({ message: 'Requests to non-existing endpoint' }));

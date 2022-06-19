@@ -63,8 +63,8 @@ export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
 	}
 };
 
-// @desc	Create User
-// @route	POST /api/users
+// @desc	Update User
+// @route	PUT /api/users/:id
 export const updateUser = async (req: IncomingMessage, res: ServerResponse, id: string) => {
 	try {
 		if (!validate(id)) {
@@ -95,6 +95,30 @@ export const updateUser = async (req: IncomingMessage, res: ServerResponse, id: 
 					res.writeHead(200, { 'Content-Type': 'application/json' });
 					res.end(JSON.stringify(updUser));
 				}
+			}
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+// @desc	Delete Current User
+// @route	DELETE /api/users/:id
+export const deleteUser = async (req: IncomingMessage, res: ServerResponse, id: string) => {
+	try {
+		if (!validate(id)) {
+			res.writeHead(400, { 'Content-Type': 'application/json' });
+			res.end(JSON.stringify({ message: 'User id is invalid' }));
+		} else {
+			const user = await Users.getById(id);
+
+			if (!user) {
+				res.writeHead(404, { 'Content-Type': 'application/json' });
+				res.end(JSON.stringify({ message: 'User does not exist' }));
+			} else {
+				await Users.remove(id);
+				res.writeHead(200, { 'Content-Type': 'application/json' });
+				res.end(JSON.stringify({ message: `User ${id} removed` }));
 			}
 		}
 	} catch (error) {
