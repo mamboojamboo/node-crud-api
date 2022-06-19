@@ -41,15 +41,21 @@ export const getUser = async (req: IncomingMessage, res: ServerResponse, id: str
 export const createProduct = async (req: IncomingMessage, res: ServerResponse) => {
 	try {
 		const body = await getPostData(req);
-		const { userName, age, hobbies } = body;
+		const { userName, age, hobbies = [] } = body;
 		const user = {
 			userName,
 			age,
 			hobbies
 		};
-		const newUser = await Users.create(user);
-		res.writeHead(201, { 'Content-Type': 'application/json' });
-		res.end(JSON.stringify(newUser));
+
+		if (!userName || !age || typeof userName !== 'string' || typeof age !== 'number') {
+			res.writeHead(400, { 'Content-Type': 'application/json' });
+			res.end(JSON.stringify({ message: 'Body does not contain required fileds or there is type error' }));
+		} else {
+			const newUser = await Users.create(user);
+			res.writeHead(201, { 'Content-Type': 'application/json' });
+			res.end(JSON.stringify(newUser));
+		}
 	} catch (error) {
 		console.error(error);
 	}

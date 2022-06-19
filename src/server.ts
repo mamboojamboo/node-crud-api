@@ -13,7 +13,7 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
 		createProduct(req, res);
 	} else {
 		res.writeHead(404, { 'Content-Type': 'application/json' });
-		res.end(JSON.stringify({ message: 'Route Not Found' }));
+		res.end(JSON.stringify({ message: 'Requests to non-existing endpoint' }));
 	}
 });
 
