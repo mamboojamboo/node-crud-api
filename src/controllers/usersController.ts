@@ -1,6 +1,7 @@
 import { ServerResponse, IncomingMessage } from 'http';
 import { validate } from 'uuid';
 import Users from '../models/usersModel';
+import getPostData from '../utils';
 
 // @desc	Gets All Users
 // @route	GET /api/users
@@ -30,6 +31,25 @@ export const getUser = async (req: IncomingMessage, res: ServerResponse, id: str
 			res.writeHead(200, { 'Content-Type': 'application/json' });
 			res.end(JSON.stringify(user));
 		}
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+// @desc	Create User
+// @route	POST /api/users
+export const createProduct = async (req: IncomingMessage, res: ServerResponse) => {
+	try {
+		const body = await getPostData(req);
+		const { userName, age, hobbies } = body;
+		const user = {
+			userName,
+			age,
+			hobbies
+		};
+		const newUser = await Users.create(user);
+		res.writeHead(201, { 'Content-Type': 'application/json' });
+		res.end(JSON.stringify(newUser));
 	} catch (error) {
 		console.error(error);
 	}

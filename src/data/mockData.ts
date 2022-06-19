@@ -1,9 +1,4 @@
-type TUser = {
-	id: string;
-	userName: string;
-	age: number;
-	hobbies: string[] | [];
-};
+import { TUser } from '../types/index';
 
 const usersMock: TUser[] = [
 	{
