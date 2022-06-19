@@ -4,9 +4,9 @@ dotenv.config();
 
 type TypeAge = number;
 
-const age: TypeAge = 99;
+export const age: TypeAge = 99;
 
-const b = {
+export const b = {
 	a: 4,
 	b: 3,
 };
