@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 type TypeAge = number;
 
 const age: TypeAge = 99;

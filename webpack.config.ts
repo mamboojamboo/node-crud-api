@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 
 const config: webpack.Configuration = {
+	target: 'node',
 	entry: './src/index.ts',
 	output: {
 		filename: 'index.js',
